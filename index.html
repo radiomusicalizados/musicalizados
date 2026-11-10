@@ -155,6 +155,14 @@
       background: #F8F1E3; border-radius: .25rem;
     }
     .form-status strong { color: var(--brown-deep); }
+    .confirmacion { display: none; }
+    .confirmacion:target {
+      display: block; padding: 1.6rem 0; background: var(--cream);
+      border-bottom: 3px solid var(--gold);
+    }
+    .confirmacion h2 { margin: 0 0 .5rem; color: var(--brown-deep); font-size: 1.6rem; }
+    .confirmacion p { margin: 0 0 .75rem; color: var(--ink); }
+    .confirmacion a { font-weight: 700; }
     .about-panel {
       max-width: 900px; padding: clamp(1.5rem, 4vw, 2.5rem);
       background: white; border: 1px solid var(--line);
@@ -207,6 +215,20 @@
   </header>
 
   <main id="contenido">
+    <div class="confirmacion" id="peticion-enviada" role="region" aria-labelledby="titulo-peticion-enviada" tabindex="-1">
+      <div class="wrap">
+        <h2 id="titulo-peticion-enviada">Tu petición musical fue enviada</h2>
+        <p>Gracias por escribirnos. Recibimos tu petición y la tendremos en cuenta.</p>
+        <p><a href="#escuchar">Seguir escuchando Musicalizados</a> · <a href="#peticiones">Enviar otra petición</a></p>
+      </div>
+    </div>
+    <div class="confirmacion" id="mensaje-enviado" role="region" aria-labelledby="titulo-mensaje-enviado" tabindex="-1">
+      <div class="wrap">
+        <h2 id="titulo-mensaje-enviado">Tu mensaje fue enviado</h2>
+        <p>Gracias por compartir tu saludo o dedicatoria con Musicalizados.</p>
+        <p><a href="#escuchar">Seguir escuchando Musicalizados</a> · <a href="#dedicatorias">Enviar otro mensaje</a></p>
+      </div>
+    </div>
     <section class="hero" id="inicio" aria-labelledby="titulo-principal">
       <div class="wrap hero-content">
         <p class="eyebrow">Música · Fe · Esperanza</p>
@@ -259,6 +281,7 @@
         <div class="card form-card">
           <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST">
             <input type="hidden" name="_subject" value="Nueva petición musical - Musicalizados">
+            <input type="hidden" name="_next" value="https://radiomusicalizados.github.io/musicalizados/#peticion-enviada">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -295,6 +318,7 @@
         <div class="card form-card">
           <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST">
             <input type="hidden" name="_subject" value="Nuevo saludo o dedicatoria - Musicalizados">
+            <input type="hidden" name="_next" value="https://radiomusicalizados.github.io/musicalizados/#mensaje-enviado">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
