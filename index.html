@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Musicalizados: donde la alabanza cobra vida. Música, adoración y esperanza para acompañar tu camino.">
+  <meta name="theme-color" content="#39271F">
+  <title>Musicalizados | Donde la alabanza cobra vida</title>
+  <style>
+    :root {
+      --cream: #F5EEDF;
+      --cream-light: #FCF9F2;
+      --gold: #C49A45;
+      --gold-light: #E5C77F;
+      --brown: #60452F;
+      --brown-deep: #39271F;
+      --ink: #2D241E;
+      --muted: #6D5B4D;
+      --white: #FFFFFF;
+      --line: #E5D8C3;
+      --content: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+    body {
+      margin: 0; color: var(--ink); background: var(--cream-light);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.65; font-size: 1rem;
+    }
+    a { color: var(--brown); }
+    a:focus-visible, button:focus-visible, input:focus-visible,
+    select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--gold); outline-offset: 4px;
+    }
+    .skip {
+      position: absolute; top: -5rem; left: 1rem; z-index: 99;
+      padding: .8rem 1rem; color: white; background: var(--brown-deep);
+      border-radius: .4rem;
+    }
+    .skip:focus { top: 1rem; }
+    .wrap { width: min(100% - 2rem, var(--content)); margin-inline: auto; }
+    .topbar {
+      color: var(--cream); background: var(--brown-deep);
+      border-bottom: 3px solid var(--gold);
+    }
+    .header-inner {
+      min-height: 88px; display: flex; align-items: center;
+      justify-content: space-between; gap: 1.5rem; padding-block: .8rem;
+    }
+    .brand { color: white; text-decoration: none; line-height: 1.15; }
+    .brand strong {
+      display: block; font-family: Georgia, serif; font-size: 1.9rem;
+      letter-spacing: .02em;
+    }
+    .brand span {
+      display: block; margin-top: .35rem; color: var(--gold-light);
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    }
+    nav ul {
+      display: flex; flex-wrap: wrap; gap: .3rem 1rem;
+      margin: 0; padding: 0; list-style: none;
+    }
+    nav a {
+      display: inline-block; padding: .45rem .15rem; color: white;
+      font-size: .93rem; font-weight: 650; text-decoration: none;
+    }
+    nav a:hover { color: var(--gold-light); }
+    .hero {
+      position: relative; overflow: hidden; color: var(--cream);
+      background:
+        radial-gradient(ellipse at 80% 15%, rgba(196,154,69,.25), transparent 35%),
+        radial-gradient(ellipse at 95% 90%, rgba(196,154,69,.16), transparent 30%),
+        linear-gradient(120deg, #39271F 0%, #60452F 58%, #493326 100%);
+      padding: clamp(4rem, 9vw, 7.5rem) 0;
+    }
+    .hero:after {
+      content: ""; position: absolute; right: -5rem; bottom: -9rem;
+      width: 26rem; height: 26rem; border: 1px solid rgba(229,199,127,.3);
+      border-radius: 50%; box-shadow: 0 0 0 2rem rgba(229,199,127,.035),
+      0 0 0 4rem rgba(229,199,127,.025), 0 0 0 6rem rgba(229,199,127,.02);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .eyebrow {
+      margin: 0 0 .8rem; color: var(--gold);
+      font-size: .78rem; font-weight: 800; letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; }
+    h1 {
+      max-width: 760px; margin: 0; color: white;
+      font-size: clamp(2.7rem, 7vw, 5.4rem); font-weight: 600;
+    }
+    .hero p:not(.eyebrow) {
+      max-width: 650px; margin: 1.3rem 0 1.8rem;
+      color: #F4EBDD; font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: .75rem 1.2rem; border: 2px solid var(--gold);
+      border-radius: 999px; background: var(--gold); color: var(--brown-deep);
+      font-weight: 800; text-decoration: none; cursor: pointer;
+    }
+    .button:hover { background: var(--gold-light); border-color: var(--gold-light); }
+    .button.secondary { color: white; background: transparent; border-color: rgba(255,255,255,.65); }
+    .button.secondary:hover { color: var(--brown-deep); background: white; }
+    main section { padding: 4.5rem 0; }
+    main section:nth-of-type(even) { background: var(--cream); }
+    .section-head { max-width: 760px; margin-bottom: 1.7rem; }
+    .section-head h2 { margin: 0 0 .7rem; color: var(--brown-deep); font-size: clamp(2rem, 4vw, 2.8rem); }
+    .section-head > p:last-child { margin: 0; color: var(--muted); }
+    .player-panel {
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem;
+      align-items: center; padding: clamp(1.3rem, 4vw, 2.3rem);
+      color: var(--cream); background: var(--brown-deep);
+      border: 1px solid #76583B; border-radius: 1.2rem;
+      box-shadow: 0 18px 45px rgba(57,39,31,.12);
+    }
+    .player-panel h3 { margin: 0 0 .5rem; color: white; font-size: 1.7rem; }
+    .player-panel p { color: #E9DDCC; }
+    .live-label {
+      display: inline-block; margin-bottom: .8rem; padding: .25rem .65rem;
+      border: 1px solid var(--gold); border-radius: 999px;
+      color: var(--gold-light); font-size: .75rem; font-weight: 800;
+      letter-spacing: .12em;
+    }
+    audio { width: 100%; margin-top: .8rem; }
+    .small-note { color: #D9C8B2 !important; font-size: .88rem; }
+    .stream-link { color: var(--gold-light); font-weight: 700; }
+    .stream-link:hover { color: white; }
+    .grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+    .card {
+      padding: 1.5rem; background: white; border: 1px solid var(--line);
+      border-radius: 1rem; box-shadow: 0 8px 24px rgba(57,39,31,.045);
+    }
+    .card h3 { margin: 0 0 .5rem; color: var(--brown); font-size: 1.45rem; }
+    .card p { color: var(--muted); }
+    .form-card { max-width: 850px; }
+    form { display: grid; gap: 1rem; }
+    .field { display: grid; gap: .35rem; }
+    label { color: var(--brown-deep); font-weight: 750; }
+    input, select, textarea {
+      width: 100%; min-height: 48px; padding: .75rem .85rem;
+      color: var(--ink); background: white; border: 1px solid #BDAA91;
+      border-radius: .5rem; font: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .hint { margin: 0; color: var(--muted); font-size: .88rem; }
+    .form-status {
+      padding: .9rem 1rem; border-left: 4px solid var(--gold);
+      background: #F8F1E3; border-radius: .25rem;
+    }
+    .form-status strong { color: var(--brown-deep); }
+    .about-panel {
+      max-width: 900px; padding: clamp(1.5rem, 4vw, 2.5rem);
+      background: white; border: 1px solid var(--line);
+      border-radius: 1rem;
+    }
+    .about-panel p { margin-top: 0; }
+    .about-panel p:last-child { margin-bottom: 0; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: .8rem; }
+    .contact-links a {
+      display: inline-block; padding: .7rem 1rem; border: 1px solid var(--gold);
+      border-radius: .6rem; text-decoration: none; font-weight: 700;
+    }
+    footer {
+      padding: 2.5rem 0; color: var(--cream); background: var(--brown-deep);
+      text-align: center;
+    }
+    footer p { margin: .25rem 0; }
+    footer .tagline { color: var(--gold-light); font-family: Georgia, serif; font-size: 1.15rem; }
+    @media (max-width: 780px) {
+      .header-inner { align-items: flex-start; flex-direction: column; }
+      .player-panel, .grid { grid-template-columns: 1fr; }
+      main section { padding: 3.3rem 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="topbar">
+    <div class="wrap header-inner">
+      <a class="brand" href="#inicio" aria-label="Musicalizados, inicio">
+        <strong>Musicalizados</strong>
+        <span>Radio cristiana</span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#escuchar">En vivo</a></li>
+          <li><a href="#peticiones">Peticiones</a></li>
+          <li><a href="#dedicatorias">Dedicatorias</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="titulo-principal">
+      <div class="wrap hero-content">
+        <p class="eyebrow">Música · Fe · Esperanza</p>
+        <h1 id="titulo-principal">Donde la alabanza cobra vida.</h1>
+        <p>
+          Una radio para acompañarte, inspirarte y conectar tu corazón con Dios
+          a través de la música y la palabra.
+        </p>
+        <div class="actions">
+          <a class="button" href="#escuchar">Escuchar en vivo</a>
+          <a class="button secondary" href="#peticiones">Enviar una petición</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="escuchar" aria-labelledby="titulo-escuchar">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Estamos contigo</p>
+          <h2 id="titulo-escuchar">Escucha Musicalizados</h2>
+          <p>La música que acompaña tu día, estés donde estés.</p>
+        </div>
+        <div class="player-panel">
+          <div>
+            <span class="live-label">RADIO EN DIRECTO</span>
+            <h3>Una compañía para tu camino</h3>
+            <p>Presiona reproducir para comenzar a escuchar nuestra señal.</p>
+            <p class="small-note">Si la reproducción no comienza, usa el enlace que aparece debajo del reproductor para abrir la transmisión en una pestaña nueva.</p>
+          </div>
+          <div>
+            <audio controls preload="none" aria-label="Reproductor de Musicalizados en directo">
+              <source src="https://radio1.serviciosderadio.com/listen/musicalizados/radio.mp3" type="audio/mpeg">
+              Tu navegador no puede reproducir este formato de audio. Usa el enlace que aparece debajo para escuchar la transmisión.
+            </audio>
+            <p class="small-note">
+              <a class="stream-link" href="https://radio1.serviciosderadio.com/listen/musicalizados/radio.mp3" target="_blank" rel="noopener">Abrir la transmisión de Musicalizados en una pestaña nueva</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="peticiones" aria-labelledby="titulo-peticiones">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Tú eliges la canción</p>
+          <h2 id="titulo-peticiones">Peticiones musicales</h2>
+          <p>¿Qué canción te gustaría escuchar? Envíanos tu petición.</p>
+        </div>
+        <div class="card form-card">
+          <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nueva petición musical - Musicalizados">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <div class="field">
+              <label for="pet-nombre">Tu nombre</label>
+              <input id="pet-nombre" name="Nombre" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="pet-cancion">Nombre de la canción</label>
+              <input id="pet-cancion" name="Canción" type="text" required>
+            </div>
+            <div class="field">
+              <label for="pet-artista">Intérprete o grupo</label>
+              <input id="pet-artista" name="Intérprete" type="text">
+            </div>
+            <div class="field">
+              <label for="pet-mensaje">Mensaje adicional (opcional)</label>
+              <textarea id="pet-mensaje" name="Mensaje" rows="4"></textarea>
+            </div>
+            <p class="hint">Los campos marcados como obligatorios deben completarse antes de enviar.</p>
+            <button class="button" type="submit">Enviar petición musical</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="dedicatorias" aria-labelledby="titulo-dedicatorias">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Una palabra puede alegrar el día</p>
+          <h2 id="titulo-dedicatorias">Saludos y dedicatorias</h2>
+          <p>Comparte un saludo, una dedicatoria o un mensaje de ánimo con nuestra comunidad.</p>
+        </div>
+        <div class="card form-card">
+          <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nuevo saludo o dedicatoria - Musicalizados">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <div class="field">
+              <label for="ded-nombre">Tu nombre</label>
+              <input id="ded-nombre" name="Nombre" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="ded-destinatario">¿A quién va dirigido? (opcional)</label>
+              <input id="ded-destinatario" name="Destinatario" type="text">
+            </div>
+            <div class="field">
+              <label for="ded-tipo">Tipo de mensaje</label>
+              <select id="ded-tipo" name="Tipo de mensaje" required>
+                <option value="">Selecciona una opción</option>
+                <option>Saludo</option>
+                <option>Dedicatoria</option>
+                <option>Mensaje de ánimo</option>
+                <option>Otro mensaje</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ded-mensaje">Tu mensaje</label>
+              <textarea id="ded-mensaje" name="Mensaje" rows="5" required></textarea>
+            </div>
+            <button class="button" type="submit">Enviar mensaje</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros" aria-labelledby="titulo-nosotros">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Nuestra esencia</p>
+          <h2 id="titulo-nosotros">Sobre Musicalizados</h2>
+        </div>
+        <div class="about-panel">
+          <p>
+            Musicalizados es un espacio radial cristiano que busca compartir
+            música, adoración y mensajes que fortalezcan la fe. Queremos acompañar
+            cada jornada con canciones que inspiren, palabras que animen y una
+            comunidad unida por la esperanza.
+          </p>
+          <p><strong>Musicalizados: donde la alabanza cobra vida.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" aria-labelledby="titulo-contacto">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Conversemos</p>
+          <h2 id="titulo-contacto">Contacto</h2>
+          <p>Escríbenos a nuestro correo electrónico.</p>
+        </div>
+        <div class="card">
+          <p>¿Tienes alguna consulta o propuesta para la emisora? Escríbenos a radiomusicalizados@gmail.com o usa los formularios de esta página.</p>
+          <div class="contact-links">
+            <a href="mailto:radiomusicalizados@gmail.com">Escribir a radiomusicalizados@gmail.com</a>
+            <a href="#peticiones">Enviar una petición</a>
+            <a href="#dedicatorias">Enviar un mensaje</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>Musicalizados</strong></p>
+      <p class="tagline">Donde la alabanza cobra vida.</p>
+      <p>Una radio para compartir música, fe y esperanza.</p>
+    </div>
+  </footer>
+</body>
+</html>
