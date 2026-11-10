@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Musicalizados: donde la alabanza cobra vida. Música, adoración y esperanza para acompañar tu camino.">
+  <meta name="description" content="Musicalizados, radio cristiana. Donde la alabanza cobra vida. Música, adoración y esperanza para acompañar tu camino.">
   <meta name="theme-color" content="#39271F">
   <title>Musicalizados | Donde la alabanza cobra vida</title>
   <style>
@@ -12,6 +12,7 @@
       --cream-light: #FCF9F2;
       --gold: #C49A45;
       --gold-light: #E5C77F;
+      --gold-dark: #7A5A1E;
       --brown: #60452F;
       --brown-deep: #39271F;
       --ink: #2D241E;
@@ -30,7 +31,11 @@
     a { color: var(--brown); }
     a:focus-visible, button:focus-visible, input:focus-visible,
     select:focus-visible, textarea:focus-visible {
-      outline: 3px solid var(--gold); outline-offset: 4px;
+      outline: 3px solid var(--brown); outline-offset: 4px;
+    }
+    .skip:focus-visible, .topbar :focus-visible, .hero :focus-visible,
+    .player-panel :focus-visible, footer :focus-visible {
+      outline-color: var(--gold-light);
     }
     .skip {
       position: absolute; top: -5rem; left: 1rem; z-index: 99;
@@ -82,10 +87,11 @@
     }
     .hero-content { position: relative; z-index: 1; max-width: 780px; }
     .eyebrow {
-      margin: 0 0 .8rem; color: var(--gold);
+      margin: 0 0 .8rem; color: var(--gold-dark);
       font-size: .78rem; font-weight: 800; letter-spacing: .19em;
       text-transform: uppercase;
     }
+    .hero .eyebrow { color: var(--gold); }
     h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; }
     h1 {
       max-width: 760px; margin: 0; color: white;
@@ -279,7 +285,8 @@
           <p>¿Qué canción te gustaría escuchar? Envíanos tu petición.</p>
         </div>
         <div class="card form-card">
-          <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST">
+          <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST" aria-label="Petición musical">
+            <p class="hint">Los campos que no dicen «opcional» son obligatorios.</p>
             <input type="hidden" name="_subject" value="Nueva petición musical - Musicalizados">
             <input type="hidden" name="_next" value="https://radiomusicalizados.github.io/musicalizados/#peticion-enviada">
             <input type="hidden" name="_template" value="table">
@@ -294,14 +301,13 @@
               <input id="pet-cancion" name="Canción" type="text" required>
             </div>
             <div class="field">
-              <label for="pet-artista">Intérprete o grupo</label>
+              <label for="pet-artista">Intérprete o grupo (opcional)</label>
               <input id="pet-artista" name="Intérprete" type="text">
             </div>
             <div class="field">
               <label for="pet-mensaje">Mensaje adicional (opcional)</label>
               <textarea id="pet-mensaje" name="Mensaje" rows="4"></textarea>
             </div>
-            <p class="hint">Los campos marcados como obligatorios deben completarse antes de enviar.</p>
             <button class="button" type="submit">Enviar petición musical</button>
           </form>
         </div>
@@ -316,7 +322,8 @@
           <p>Comparte un saludo, una dedicatoria o un mensaje de ánimo con nuestra comunidad.</p>
         </div>
         <div class="card form-card">
-          <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST">
+          <form action="https://formsubmit.co/radiomusicalizados@gmail.com" method="POST" aria-label="Saludo o dedicatoria">
+            <p class="hint">Los campos que no dicen «opcional» son obligatorios.</p>
             <input type="hidden" name="_subject" value="Nuevo saludo o dedicatoria - Musicalizados">
             <input type="hidden" name="_next" value="https://radiomusicalizados.github.io/musicalizados/#mensaje-enviado">
             <input type="hidden" name="_template" value="table">
@@ -363,7 +370,7 @@
             cada jornada con canciones que inspiren, palabras que animen y una
             comunidad unida por la esperanza.
           </p>
-          <p><strong>Musicalizados: donde la alabanza cobra vida.</strong></p>
+          <p><strong>Donde la alabanza cobra vida.</strong></p>
         </div>
       </div>
     </section>
